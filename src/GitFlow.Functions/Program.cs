@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 string environmentName = Environment.GetEnvironmentVariable("EnvironmentName")!;
-string environmentVersion = "1.0.3";
+string environmentVersion = "1.0.4";
 
 
 IHost host = new HostBuilder()
