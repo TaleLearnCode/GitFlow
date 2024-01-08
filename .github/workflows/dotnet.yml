@@ -10,7 +10,7 @@ on:
     branches: [ "develop" ]
 env:
   DOTNET_CORE_VERSION: 8.0.x
-  WORKING_DIRECTORY: src\
+  WORKING_DIRECTORY: src
 jobs:
   build:
 
