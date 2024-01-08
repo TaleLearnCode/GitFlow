@@ -32,7 +32,7 @@ jobs:
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build --verbosity normal
   publish:
     runs-on: windows-latest
-    needs: test
+    needs: build
     steps:
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
