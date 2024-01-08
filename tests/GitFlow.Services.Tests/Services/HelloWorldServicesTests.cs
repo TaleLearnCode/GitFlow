@@ -24,14 +24,15 @@ public class HelloWorldServicesTests
 
 		// Arrange
 		string environmentName = "Test Environment";
-		string environmentVersion = "1.0";
-		HelloWorldServices helloWorldServices = new(environmentName, "2.0");
+		string environmentVersion_Set = "1.0";
+		string environmentVersion_Test = "1.0";
+		HelloWorldServices helloWorldServices = new(environmentName, environmentVersion_Set);
 
 		// Act
 		string result = helloWorldServices.GetHelloWorld();
 
 		// Assert
-		Assert.Equal($"Hello World from {environmentName} with version {environmentVersion}", result);
+		Assert.Equal($"Hello World from {environmentName} with version {environmentVersion_Test}", result);
 
 	}
 
