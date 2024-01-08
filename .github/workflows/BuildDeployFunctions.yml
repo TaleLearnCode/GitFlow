@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Function App func-gitflow-use-dev
+name: Build and deploy GitFlow.Functions
 on:
   push:
     branches:
