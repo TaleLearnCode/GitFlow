@@ -24,7 +24,7 @@ public class HelloWorldServicesTests
 
 		// Arrange
 		string environmentName = "Test Environment";
-		string environmentVersion_Set = "2.0";
+		string environmentVersion_Set = "3.0";
 		string environmentVersion_Test = "1.0";
 		HelloWorldServices helloWorldServices = new(environmentName, environmentVersion_Set);
 
