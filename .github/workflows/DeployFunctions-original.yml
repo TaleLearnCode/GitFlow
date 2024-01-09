@@ -1,11 +1,11 @@
-name: Deploy to func-helloworld-use-dev
+name: Build and deploy GitFlow.Functions
 on:
   push:
     branches:
     - develop
 env:
-  AZURE_FUNCTIONAPP_NAME: func-helloworld-use-dev
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: GitFlow.Functions/published
+  AZURE_FUNCTIONAPP_NAME: func-gitflow-use-dev
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: GitFlow.Functions\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: src\GitFlow.Functions
@@ -13,7 +13,7 @@ env:
   AZURE_FUNCTIONAPP_SLOT_NAME: staging
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET SDK
@@ -28,6 +28,8 @@ jobs:
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: Test
+      run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build --verbosity normal
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
     - name: Publish Artifacts
@@ -36,7 +38,7 @@ jobs:
         name: functionapp
         path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     steps:
     - name: Download artifact from build job
@@ -48,6 +50,6 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        publish-profile: ${{ secrets.func_helloworld_use_dev_staging_34FE }}
+        publish-profile: ${{ secrets.func_gitflow_use_dev_staging_92AC }}
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
         slot-name: ${{ env.AZURE_FUNCTIONAPP_SLOT_NAME }}
